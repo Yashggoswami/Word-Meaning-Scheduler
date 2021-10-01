@@ -1,4 +1,4 @@
 Python modules used - 
 
 1. plyer
-2. schedule
+2. schedule - https://pypi.org/project/schedule/
