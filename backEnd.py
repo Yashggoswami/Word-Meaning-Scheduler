@@ -18,6 +18,14 @@ def readDataFromFile():
     global count,dic
     count = int(file.readline())
     dic = eval(file.readline())
+    
+def get_dic():
+    global dic
+    return dic
+
+def get_word_number():
+    global count
+    return count
 
 def todays_work():
     day = date.today().strftime("%A")
@@ -57,7 +65,6 @@ def generate_random_words():
     # print(f"{random_word} = {random_word_meaning}")
     return [random_word,random_word_meaning]
     
-# generate_random_words()
 
 def notification_message():
     ls = generate_random_words()
