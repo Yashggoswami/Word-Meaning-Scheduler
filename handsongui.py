@@ -21,9 +21,10 @@ for x in range(len(days)):
 def proceedFun():
     # getting number of words 
     words = int(no_of_word.get())
+    print(words)
     # getting days of the weeks
-    for c in dayInput:
-        print(c.get())
+    for c in range(len(dayInput)):
+        print(days[c],"  = ",dayInput[c].get())
     
 
 def closeWindow():
