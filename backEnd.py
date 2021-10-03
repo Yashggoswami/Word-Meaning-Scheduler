@@ -4,21 +4,47 @@ from tkinter import IntVar
 import schedule
 import time
 import requests
+import random
+from datetime import datetime as date
 
 
+
+count = 0
+dic = []
+
+# reading data from the save-file
+def readDataFromFile():
+    file = open('save-file.txt','r')
+    global count,dic
+    count = int(file.readline())
+    dic = eval(file.readline())
+
+def todays_work():
+    day = date.today().strftime("%A")
+    if(dic[day] == 1):
+        print(f'today is {day} at it is valid')
+    
 # write/rewrite data into the savefile 
 def writeDataInFile(word,days):
      # getting number of words 
     file = open('save-file.txt','w')
     file.truncate(0)
     file.write(str(word)+"\n")
-    file.write("[")
+    file.write("{")
+    size = len(days)
     for day,value in days.items():
-        file.write(f"({day},{str(value.get())})")
-    file.write("]")
+        file.write(f"'{day}':{str(value.get())}")
+        size -= 1
+        if size != 0:
+            file.write(',')
+    file.write("}")
     file.close()
 
-
+def schedule_next_run():
+   time_str = '{:02d}:{:02d}'.format(random.randint(12, 11), random.randint(0, 59))
+   schedule.clear()
+   print("Scheduled for {}".format(time_str))
+   schedule.every().day.at(time_str).do(job)
 
 
 def generate_random_words():
@@ -42,9 +68,11 @@ def notification_message():
     )
 
 if __name__ == "__main__":
-    schedule.every(20).seconds.do(notification_message)
+    readDataFromFile()
+    todays_work()
+    # schedule.every(20).seconds.do(notification_message)
 
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(1)
