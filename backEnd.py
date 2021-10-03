@@ -1,8 +1,24 @@
 from plyer import notification
 from bs4 import BeautifulSoup
+from tkinter import IntVar
 import schedule
 import time
 import requests
+
+
+# write/rewrite data into the savefile 
+def writeDataInFile(word,days):
+     # getting number of words 
+    file = open('save-file.txt','w')
+    file.truncate(0)
+    file.write(str(word)+"\n")
+    file.write("[")
+    for day,value in days.items():
+        file.write(f"({day},{str(value.get())})")
+    file.write("]")
+    file.close()
+
+
 
 
 def generate_random_words():
@@ -25,9 +41,10 @@ def notification_message():
         timeout = 15
     )
 
-schedule.every(20).seconds.do(notification_message)
+if __name__ == "__main__":
+    schedule.every(20).seconds.do(notification_message)
 
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
