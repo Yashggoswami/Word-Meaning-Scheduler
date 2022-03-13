@@ -1,0 +1,2 @@
+122
+{'Sunday':1,'Monday':1,'Tuesday':0,'Wednesday':1,'Thursday':0,'Friday':0,'Saturday':1}
